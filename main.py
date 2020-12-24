@@ -60,4 +60,4 @@ async def 예시(ctx):
     embed.add_field(name="**메뉴**", value="!메뉴 12 24", inline=False)
     await ctx.send(embed=embed)
 
-app.run('NzkxMzIwMjkwMzg1ODU0NDc0.X-Nccw.i84u0DLA9xd50KtyLsyr_01dZSs')
+app.run('token')
