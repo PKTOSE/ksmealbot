@@ -1,21 +1,28 @@
-import time
 import requests
 import re
 from bs4 import BeautifulSoup
+from datetime import datetime
+from pytz import timezone
 
-n = time.localtime().tm_wday #요일을 자동으로 불러옴
+n = datetime.now(timezone('Asia/Seoul')).weekday() #요일을 자동으로 불러옴
 
-def get_html(url):
-    _html = ""
-    resp = requests.get(url)
+PROXY = {"https":'219.255.197.90:9000',
+          "http": '219.255.197.90:9000'}
+
+def getHtml(url):
+    html = ""
+    resp = requests.get(url,proxies=PROXY)
     if resp.status_code == 200:
-        _html = resp.text
-    return _html
+        html = resp.text
+    return html
 
+if (n==6):
+  num = 0
+else:
+  num = n + 1  #0월1화2수3목4금5토6일
 
-num = n + 1  #0월1화2수3목4금5토6일
 URL = ("http://www.kyungsang.or.kr/user/carte/list.do?menuCd=MCD_000000000000014081")
-html = get_html(URL)
+html = getHtml(URL)
 soup = BeautifulSoup(html, 'html.parser')
 element = soup.find_all("tr")
 element = element[4].find_all('td')
